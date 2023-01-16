@@ -26,6 +26,12 @@ namespace MobilyaOtomasyon
             }
         }
 
+        private void AnaForm_Load(object sender, EventArgs e)
+        {
+            // Ana sayfanýn açýlmasýný istediðimiz için ana sayfa butonunun click event'ini simulate edeceðiz
+            AnaSayfaBtn.PerformClick();
+        }
+
         // BURADA DRAG&DROP ÝÞLEMLERÝNE BAÞLIYORUZ
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
@@ -66,6 +72,8 @@ namespace MobilyaOtomasyon
 
                 Form form = FrmList[btn.Text];
                 form.Show();
+
+                AnaLabel.Text = btn.Text;
             }
         }
 

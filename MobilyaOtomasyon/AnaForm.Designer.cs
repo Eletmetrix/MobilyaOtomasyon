@@ -40,7 +40,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.AnaLabel = new System.Windows.Forms.Label();
             this.FormPanel = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -215,25 +215,25 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel4.Controls.Add(this.label2);
+            this.panel4.Controls.Add(this.AnaLabel);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(200, 10);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(925, 100);
             this.panel4.TabIndex = 2;
             // 
-            // label2
+            // AnaLabel
             // 
-            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(925, 100);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Ana Sayfa";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.AnaLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.AnaLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AnaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.AnaLabel.ForeColor = System.Drawing.SystemColors.Control;
+            this.AnaLabel.Location = new System.Drawing.Point(0, 0);
+            this.AnaLabel.Name = "AnaLabel";
+            this.AnaLabel.Size = new System.Drawing.Size(925, 100);
+            this.AnaLabel.TabIndex = 1;
+            this.AnaLabel.Text = "Ana Sayfa";
+            this.AnaLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormPanel
             // 
@@ -255,6 +255,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AnaForm";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.AnaForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -277,7 +278,7 @@
         private Label label1;
         private Panel panel4;
         private Button KapatBtn;
-        private Label label2;
+        private Label AnaLabel;
         private Panel FormPanel;
     }
 }
