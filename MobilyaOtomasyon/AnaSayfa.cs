@@ -16,5 +16,12 @@ namespace MobilyaOtomasyon
         {
             InitializeComponent();
         }
+
+        private void AnaSayfa_Load(object sender, EventArgs e)
+        {
+            // Global database sınıfından değerleri alıp ana formumuza iliştiriyoruz
+            ToplamMusteriLbl.Text = GlobalDatabaseActions.ToplamMusteri.ToString();
+            ToplamAktifSiparisLbl.Text = GlobalDatabaseActions.ToplamBekleyenSiparis.ToString();
+        }
     }
 }

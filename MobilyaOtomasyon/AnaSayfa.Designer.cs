@@ -31,11 +31,11 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
+            this.ToplamAktifSiparisLbl = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.ToplamMusteriLbl = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -75,7 +75,7 @@
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.label3, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.ToplamAktifSiparisLbl, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.label4, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
@@ -86,17 +86,17 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(433, 499);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
-            // label3
+            // ToplamAktifSiparisLbl
             // 
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(3, 324);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(427, 175);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Yükleniyor...";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.ToplamAktifSiparisLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ToplamAktifSiparisLbl.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ToplamAktifSiparisLbl.ForeColor = System.Drawing.SystemColors.Control;
+            this.ToplamAktifSiparisLbl.Location = new System.Drawing.Point(3, 324);
+            this.ToplamAktifSiparisLbl.Name = "ToplamAktifSiparisLbl";
+            this.ToplamAktifSiparisLbl.Size = new System.Drawing.Size(427, 175);
+            this.ToplamAktifSiparisLbl.TabIndex = 1;
+            this.ToplamAktifSiparisLbl.Text = "Yükleniyor...";
+            this.ToplamAktifSiparisLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label4
             // 
@@ -125,7 +125,7 @@
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.ToplamMusteriLbl, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
@@ -136,17 +136,17 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(432, 499);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // label2
+            // ToplamMusteriLbl
             // 
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(3, 324);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(426, 175);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Yükleniyor...";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.ToplamMusteriLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ToplamMusteriLbl.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ToplamMusteriLbl.ForeColor = System.Drawing.SystemColors.Control;
+            this.ToplamMusteriLbl.Location = new System.Drawing.Point(3, 324);
+            this.ToplamMusteriLbl.Name = "ToplamMusteriLbl";
+            this.ToplamMusteriLbl.Size = new System.Drawing.Size(426, 175);
+            this.ToplamMusteriLbl.TabIndex = 1;
+            this.ToplamMusteriLbl.Text = "Yükleniyor...";
+            this.ToplamMusteriLbl.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label1
             // 
@@ -169,6 +169,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AnaSayfa";
             this.Text = "AnaSayfa";
+            this.Load += new System.EventHandler(this.AnaSayfa_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -184,10 +185,10 @@
         private Panel panel2;
         private Panel panel1;
         private TableLayoutPanel tableLayoutPanel3;
-        private Label label3;
+        private Label ToplamAktifSiparisLbl;
         private Label label4;
         private TableLayoutPanel tableLayoutPanel2;
-        private Label label2;
+        private Label ToplamMusteriLbl;
         private Label label1;
     }
 }

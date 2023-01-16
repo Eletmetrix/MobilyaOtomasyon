@@ -10,6 +10,12 @@ namespace MobilyaOtomasyon
         public AnaForm()
         {
             InitializeComponent();
+        }
+
+        private void AnaForm_Load(object sender, EventArgs e)
+        {
+            // Deðerlerin oluþumu için bu fonksiyonu çaðýrýyoruz
+            GlobalDatabaseActions.Baslatici();
 
             // Panel butonlarýndaki yazýdan formlarý bulabilmek için bu listeyi oluþturuyoruz
             FrmList = new Dictionary<string, Form> {
@@ -24,10 +30,7 @@ namespace MobilyaOtomasyon
                 FormPanel.Controls.Add(item);
                 item.Hide();
             }
-        }
 
-        private void AnaForm_Load(object sender, EventArgs e)
-        {
             // Ana sayfanýn açýlmasýný istediðimiz için ana sayfa butonunun click event'ini simulate edeceðiz
             AnaSayfaBtn.PerformClick();
         }
