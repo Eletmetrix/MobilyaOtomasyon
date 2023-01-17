@@ -4,23 +4,36 @@ namespace MobilyaOtomasyon
 {
     public partial class AnaForm : Form
     {
-        protected Dictionary<string, Form> FrmList;
-        protected string SuAnkiForm;
+        public Dictionary<string, BosSayfa> FrmList { get; private set; } = new Dictionary<string, BosSayfa>();
+        public string SuAnkiForm { get; private set; } = "";
 
         public AnaForm()
         {
             InitializeComponent();
         }
 
+        // Panel butonlarýnýn týklanmasýný simulate eder (eðer verilen deðer geçerliyse).
+        public void SimulateButtonClick(int ID)
+        {
+            switch (ID)
+            {
+                case 0: AnaSayfaBtn.PerformClick(); break;
+                case 1: MusteriEkleBtn.PerformClick(); break;
+                case 2: UrunEkleBtn.PerformClick(); break;
+                case 3: MusteriBilgisiBtn.PerformClick(); break;
+                case 4: UrunBilgisiBtn.PerformClick(); break;
+            }
+        }
+
         private void AnaForm_Load(object sender, EventArgs e)
         {
-            // Deðerlerin oluþumu için bu fonksiyonu çaðýrýyoruz
-            GlobalDatabaseActions.Baslatici();
-
             // Panel butonlarýndaki yazýdan formlarý bulabilmek için bu listeyi oluþturuyoruz
-            FrmList = new Dictionary<string, Form> {
-                { "Ana Sayfa", new AnaSayfa() }
+            FrmList = new Dictionary<string, BosSayfa> {
+                { "Ana Sayfa", new AnaSayfa(this) },
+                { "Müþteri Ekle", new MusteriEkle(this) },
+                { "Müþteri Bilgisi", new Musteriler(this) }
             };
+
 
             // Dictionary'deki tüm formlarý panele ekliyoruz
             foreach (var item in FrmList.Values)
@@ -32,7 +45,7 @@ namespace MobilyaOtomasyon
             }
 
             // Ana sayfanýn açýlmasýný istediðimiz için ana sayfa butonunun click event'ini simulate edeceðiz
-            AnaSayfaBtn.PerformClick();
+            SimulateButtonClick(0);
         }
 
         // BURADA DRAG&DROP ÝÞLEMLERÝNE BAÞLIYORUZ
@@ -66,15 +79,17 @@ namespace MobilyaOtomasyon
             {
                 foreach (var item in FormPanel.Controls)
                 {
-                    Form? frm = item as Form;
-                    if (frm != null)
+                    BosSayfa? frm = item as BosSayfa;
+                    if (frm != null && frm.Visible)
                     {
                         frm.Hide();
+                        frm.SayfaKapandi();
                     }
                 }
 
-                Form form = FrmList[btn.Text];
+                BosSayfa form = FrmList[btn.Text];
                 form.Show();
+                form.SayfaAcildi();
 
                 AnaLabel.Text = btn.Text;
             }

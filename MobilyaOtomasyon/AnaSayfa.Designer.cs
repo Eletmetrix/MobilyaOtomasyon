@@ -169,7 +169,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AnaSayfa";
             this.Text = "AnaSayfa";
-            this.Load += new System.EventHandler(this.AnaSayfa_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
