@@ -31,5 +31,14 @@ namespace MobilyaOtomasyon
                 dataGridView1.DataSource = await GlobalDatabaseActions.UrunleriCagir();
             }
         }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0 && UstForm != null && UstForm.FrmList.ContainsKey("Ürün Detayları") && UstForm.FrmList["Ürün Detayları"] != null && UstForm.FrmList["Ürün Detayları"] is UrunBilgi)
+            {
+                ((UrunBilgi)UstForm.FrmList["Ürün Detayları"]).UrunID = dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString();
+                UstForm.ShowFormInPanel("Ürün Detayları");
+            }
+        }
     }
 }

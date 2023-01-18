@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Data;
+using System.Windows.Forms;
+using static MobilyaOtomasyon.UrunBilgi;
+using System.ComponentModel;
 
 namespace MobilyaOtomasyon
 {
@@ -315,5 +318,92 @@ namespace MobilyaOtomasyon
                 }
             }
         }
+
+
+        // Ürün bilgilerini (ebatlar dahil) çağırır
+        public static async Task<UrunBilgisi?> UrunBilgisiGetir(string? ID)
+        {
+            if (!StrKontrol(ID, -1))
+            {
+                // Değerler uygunsuzdu
+                return null;
+            }
+            else
+            {
+                using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Database.mdf; Integrated Security = True"))
+                {
+                    await con.OpenAsync();
+
+                    using (SqlCommand cmd = new SqlCommand("SELECT " +
+                        "Urun.UrunAdi, Urun.GirisTarihi, Urun.TeslimTarihi, Urun.TeslimEdildi, Urun.Adres, " +
+                        "Ebatlar.EbatIsim, Ebatlar.EbatDeger, Ebatlar.EbatTur " +
+                        "FROM Urun " +
+                        "JOIN Ebatlar ON Ebatlar.UrunId = Urun.UrunId " +
+                        "WHERE Urun.UrunId = @uid; ", con))
+                    {
+                        cmd.Parameters.Add("@uid", SqlDbType.Int).Value = ID;
+
+                        UrunBilgisi urunBilgi = new UrunBilgisi();
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            BindingList<EbatBilgi> ebatBilgileri = new BindingList<EbatBilgi>();
+                            while (reader.Read()) 
+                            {
+                                if (urunBilgi.UrunAdi == "")
+                                {
+                                    urunBilgi.UrunAdi = reader.GetString("UrunAdi");
+                                    urunBilgi.GirisTarihi = reader.GetDateTime("GirisTarihi");
+                                    if (!reader.IsDBNull("TeslimTarihi"))
+                                        urunBilgi.TeslimTarihi = reader.GetDateTime("TeslimTarihi");
+                                    urunBilgi.TeslimEdildi = reader.GetBoolean("TeslimEdildi");
+                                    urunBilgi.Adres = reader.GetString("Adres");
+                                }
+
+                                ebatBilgileri.Add(new EbatBilgi(reader.GetString("EbatIsim"), reader.GetString("EbatDeger"), reader.GetBoolean("EbatTur")));
+                            }
+
+                            urunBilgi.Ebatlar = ebatBilgileri;
+                        }
+
+                        return urunBilgi;
+                    }
+                }
+            }
+        }
+
+        // Ürünün teslim edildi bilgisini düzenler
+        public static async Task<bool> UrununIsaretiDegistir(string? ID, bool TeslimEdildi)
+        {
+            if (!StrKontrol(ID, -1))
+            {
+                // Değerler uygunsuzdu
+                return false;
+            }
+            else
+            {
+                using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Database.mdf; Integrated Security = True"))
+                {
+                    await con.OpenAsync();
+                    using (SqlCommand cmd = new SqlCommand("UPDATE Urun SET TeslimEdildi = @teslim, TeslimTarihi = @teslimtarih WHERE UrunId = @mid", con))
+                    {
+                        cmd.Parameters.Add("@mid", SqlDbType.Int).Value = ID;
+                        cmd.Parameters.Add("@teslim", SqlDbType.Bit).Value = TeslimEdildi;
+                        cmd.Parameters.Add("@teslimtarih", SqlDbType.Date).Value = TeslimEdildi ? DateTime.Now : DBNull.Value;
+                        cmd.CommandType = CommandType.Text;
+                        return await cmd.ExecuteNonQueryAsync() > 0;
+                    }
+                }
+            }
+        }
+    }
+
+    public class UrunBilgisi
+    {
+        public string UrunAdi { get; set; } = "";
+        public DateTime GirisTarihi { get; set; } = DateTime.Now;
+        public DateTime? TeslimTarihi { get; set; } = DateTime.Now;
+        public bool TeslimEdildi { get; set; } = false;
+        public string Adres { get; set; } = "";
+        public BindingList<EbatBilgi> Ebatlar { get; set; } = new BindingList<EbatBilgi>();
     }
 }

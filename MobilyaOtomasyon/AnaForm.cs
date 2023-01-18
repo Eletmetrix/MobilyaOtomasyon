@@ -34,7 +34,8 @@ namespace MobilyaOtomasyon
                 { "Müþteri Düzenle", new MusteriDuzenle(this) },
                 { "Ürün Ekle", new UrunEkleMusteriSec(this) },
                 { "Ürün Ekle (Aþama 2)", new UrunEkleBilgi(this) },
-                { "Ürün Bilgisi", new Urunler(this) }
+                { "Ürün Bilgisi", new Urunler(this) },
+                { "Ürün Detaylarý", new UrunBilgi(this) }
             };
 
 
