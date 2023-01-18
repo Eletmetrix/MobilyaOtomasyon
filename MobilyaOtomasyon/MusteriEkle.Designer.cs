@@ -36,7 +36,6 @@
             this.IsimTxtBox = new System.Windows.Forms.TextBox();
             this.TelNoTxtBox = new System.Windows.Forms.MaskedTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.splitter1 = new System.Windows.Forms.Splitter();
             this.EkleBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -139,23 +138,12 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.splitter1);
             this.panel1.Controls.Add(this.EkleBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(153, 462);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(619, 44);
             this.panel1.TabIndex = 5;
-            // 
-            // splitter1
-            // 
-            this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter1.Enabled = false;
-            this.splitter1.Location = new System.Drawing.Point(409, 0);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(10, 44);
-            this.splitter1.TabIndex = 5;
-            this.splitter1.TabStop = false;
             // 
             // EkleBtn
             // 
@@ -198,6 +186,5 @@
         private MaskedTextBox TelNoTxtBox;
         private Panel panel1;
         private Button EkleBtn;
-        private Splitter splitter1;
     }
 }

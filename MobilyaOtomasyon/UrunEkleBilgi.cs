@@ -99,7 +99,7 @@ namespace MobilyaOtomasyon
 
                 basarili = await GlobalDatabaseActions.UrunEkle(TutulanMusteriID, UrunİsimTxtBox.Text, AdresTxtBox.Text, Ebatlar.ToList());
 
-                string icerik = basarili ? "Müşteri bilgisi kaydedildi!" : "İşlem başarısız oldu. Lütfen bilgileri kontrol ediniz";
+                string icerik = basarili ? "Ürün bilgisi kaydedildi!" : "İşlem başarısız oldu. Lütfen bilgileri kontrol ediniz";
                 string baslik = basarili ? "Başarılı" : "Başarısız";
                 MessageBoxIcon ikon = basarili ? MessageBoxIcon.Information : MessageBoxIcon.Error;
                 MessageBox.Show(icerik, baslik, MessageBoxButtons.OK, ikon);

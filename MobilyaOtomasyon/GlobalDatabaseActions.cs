@@ -113,6 +113,77 @@ namespace MobilyaOtomasyon
             }
         }
 
+        // Müşteriyi siler
+        public static async Task<bool> MusteriSil(string? ID)
+        {
+            if (!StrKontrol(ID, -1))
+            {
+                // Değerler uygunsuzdu
+                return false;
+            }
+            else
+            {
+                using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Veritabani.mdf; Integrated Security = True"))
+                {
+                    await con.OpenAsync();
+
+                    using (SqlCommand cmd = new SqlCommand("SELECT " +
+                        "Musteri.MusteriId as m, Urun.UrunId as u, Ebatlar.EbatId as e " +
+                        "FROM " +
+                        "Musteri " +
+                        "LEFT JOIN Urun ON Urun.MusteriId = Musteri.MusteriId " +
+                        "LEFT JOIN Ebatlar ON Ebatlar.UrunId = Urun.UrunId " +
+                        "WHERE " +
+                        "Musteri.MusteriId = @mid;", con))
+                    {
+                        cmd.Parameters.Add("@mid", SqlDbType.Int).Value = ID;
+
+                        List<HashSet<int>> IDs = new List<HashSet<int>>
+                        {
+                            new HashSet<int>(),
+                            new HashSet<int>(),
+                            new HashSet<int>()
+                        };
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (reader.Read())
+                            {
+                                if (!reader.IsDBNull("m"))
+                                    IDs[0].Add(reader.GetInt32("m"));
+                                if (!reader.IsDBNull("u"))
+                                    IDs[1].Add(reader.GetInt32("u"));
+                                if (!reader.IsDBNull("e"))
+                                    IDs[2].Add(reader.GetInt32("e"));
+                            }
+                        }
+                        if (IDs[2].Count > 0)
+                        {
+                            using (SqlCommand cmd1 = new SqlCommand("DELETE FROM Ebatlar WHERE EbatId IN (" + string.Join(", ", IDs[2]) + ")", con))
+                            {
+                                await cmd1.ExecuteNonQueryAsync();
+                            }
+                        }
+                        if (IDs[1].Count > 0)
+                        {
+                            using (SqlCommand cmd1 = new SqlCommand("DELETE FROM Urun WHERE UrunId IN (" + string.Join(", ", IDs[1]) + ")", con))
+                            {
+                                await cmd1.ExecuteNonQueryAsync();
+                            }
+                        }
+                        if (IDs[0].Count > 0)
+                        {
+                            using (SqlCommand cmd1 = new SqlCommand("DELETE FROM Musteri WHERE MusteriId IN (" + string.Join(", ", IDs[0]) + ")", con))
+                            {
+                                await cmd1.ExecuteNonQueryAsync();
+                            }
+                        }
+
+                        return true;
+                    }
+                }
+            }
+        }
+
         // Ürün ve ebat bilgilerini ekler
         public static async Task<bool> UrunEkle(string? MusteriID, string? Urunİsmi, string? Adres, List<EbatBilgi>? Ebatlar)
         {

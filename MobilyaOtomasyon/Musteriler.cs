@@ -24,14 +24,29 @@ namespace MobilyaOtomasyon
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (UstForm != null && UstForm.FrmList.ContainsKey("Müşteri Düzenle") && UstForm.FrmList["Müşteri Düzenle"] != null && UstForm.FrmList["Müşteri Düzenle"] is MusteriDuzenle)
+            
+        }
+
+        private void DuzenleBtn_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0 && UstForm != null && UstForm.FrmList.ContainsKey("Müşteri Düzenle") && UstForm.FrmList["Müşteri Düzenle"] != null && UstForm.FrmList["Müşteri Düzenle"] is MusteriDuzenle)
             {
-                string? id = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string? ad = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                string? soyad = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                string? telno = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                
+                string? id = dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[0].Value.ToString();
+                string? ad = dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[1].Value.ToString();
+                string? soyad = dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[2].Value.ToString();
+                string? telno = dataGridView1.Rows[dataGridView1.SelectedRows[0].Index].Cells[3].Value.ToString();
+
                 ((MusteriDuzenle)UstForm.FrmList["Müşteri Düzenle"]).Duzenle(id, ad, soyad, telno);
+            }
+        }
+
+        private async void SilBtn_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                await GlobalDatabaseActions.MusteriSil(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+
+                dataGridView1.DataSource = await GlobalDatabaseActions.MusterileriCagir();
             }
         }
     }
