@@ -238,6 +238,7 @@ namespace MobilyaOtomasyon
             {
                 await con.OpenAsync();
                 using (SqlDataAdapter reader = new SqlDataAdapter("SELECT " +
+                    "Urun.UrunId as 'ID', " +
                     "Urun.UrunAdi as 'Ürün Adı', " +
                     "Urun.GirisTarihi as 'Giriş Tarihi', " +
                     "Urun.TeslimTarihi as 'Teslim Tarihi', " +
@@ -251,6 +252,66 @@ namespace MobilyaOtomasyon
                     var dt = new DataTable();
                     reader.Fill(dt);
                     return dt;
+                }
+            }
+        }
+
+        // Ürünü siler
+        public static async Task<bool> UrunSil(string? ID)
+        {
+            if (!StrKontrol(ID, -1))
+            {
+                // Değerler uygunsuzdu
+                return false;
+            }
+            else
+            {
+                using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Veritabani.mdf; Integrated Security = True"))
+                {
+                    await con.OpenAsync();
+
+                    using (SqlCommand cmd = new SqlCommand("SELECT " +
+                        "Urun.UrunId as u, Ebatlar.EbatId as e " +
+                        "FROM " +
+                        "Urun " +
+                        "LEFT JOIN Ebatlar ON Ebatlar.UrunId = Urun.UrunId " +
+                        "WHERE " +
+                        "Urun.UrunId = @uid;", con))
+                    {
+                        cmd.Parameters.Add("@uid", SqlDbType.Int).Value = ID;
+
+                        List<HashSet<int>> IDs = new List<HashSet<int>>
+                        {
+                            new HashSet<int>(),
+                            new HashSet<int>()
+                        };
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (reader.Read())
+                            {
+                                if (!reader.IsDBNull("u"))
+                                    IDs[0].Add(reader.GetInt32("u"));
+                                if (!reader.IsDBNull("e"))
+                                    IDs[1].Add(reader.GetInt32("e"));
+                            }
+                        }
+                        if (IDs[1].Count > 0)
+                        {
+                            using (SqlCommand cmd1 = new SqlCommand("DELETE FROM Ebatlar WHERE EbatId IN (" + string.Join(", ", IDs[1]) + ")", con))
+                            {
+                                await cmd1.ExecuteNonQueryAsync();
+                            }
+                        }
+                        if (IDs[0].Count > 0)
+                        {
+                            using (SqlCommand cmd1 = new SqlCommand("DELETE FROM Urun WHERE UrunId IN (" + string.Join(", ", IDs[0]) + ")", con))
+                            {
+                                await cmd1.ExecuteNonQueryAsync();
+                            }
+                        }
+
+                        return true;
+                    }
                 }
             }
         }

@@ -22,17 +22,14 @@ namespace MobilyaOtomasyon
             dataGridView1.DataSource = await GlobalDatabaseActions.UrunleriCagir();
         }
 
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private async void SilBtn_Click(object sender, EventArgs e)
         {
-            /*if (UstForm != null && UstForm.FrmList.ContainsKey("Müşteri Ekle") && UstForm.FrmList["Müşteri Ekle"] != null && UstForm.FrmList["Müşteri Ekle"] is MusteriEkle)
+            if (dataGridView1.SelectedRows.Count > 0)
             {
-                string? id = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string? ad = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                string? soyad = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                string? telno = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                
-                ((MusteriEkle)UstForm.FrmList["Müşteri Ekle"]).MusteriDuzenle(id, ad, soyad, telno);
-            }*/
+                await GlobalDatabaseActions.UrunSil(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+
+                dataGridView1.DataSource = await GlobalDatabaseActions.UrunleriCagir();
+            }
         }
     }
 }
