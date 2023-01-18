@@ -21,7 +21,7 @@ namespace MobilyaOtomasyon
         // Program ilk oluşturulduğunda bu fonksiyon çalışarak gereken değer atamalarını yapar.
         public static void Baslatici()
         {
-            using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Veritabani.mdf; Integrated Security = True"))
+            using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Database.mdf; Integrated Security = True"))
             {
                 con.Open();
                 using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Musteri", con))
@@ -57,7 +57,7 @@ namespace MobilyaOtomasyon
             }
             else
             {
-                using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Veritabani.mdf; Integrated Security = True"))
+                using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Database.mdf; Integrated Security = True"))
                 {
                     await con.OpenAsync();
                     using (SqlCommand cmd = new SqlCommand("INSERT INTO Musteri (Ad, Soyad, TelefonNum) VALUES (@isim, @soyisim, @telno)", con))
@@ -82,7 +82,7 @@ namespace MobilyaOtomasyon
             }
             else
             {
-                using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Veritabani.mdf; Integrated Security = True"))
+                using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Database.mdf; Integrated Security = True"))
                 {
                     await con.OpenAsync();
                     using (SqlCommand cmd = new SqlCommand("UPDATE Musteri SET Ad = @isim, Soyad = @soyisim, TelefonNum = @telno WHERE MusteriID = @id", con))
@@ -101,7 +101,7 @@ namespace MobilyaOtomasyon
         // Müşterileri çağırır
         public static async Task<DataTable> MusterileriCagir()
         {
-            using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Veritabani.mdf; Integrated Security = True"))
+            using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Database.mdf; Integrated Security = True"))
             {
                 await con.OpenAsync();
                 using (SqlDataAdapter reader = new SqlDataAdapter("SELECT MusteriID as ID, Ad, Soyad, TelefonNum as 'Telefon Numarası' FROM Musteri", con))
@@ -123,7 +123,7 @@ namespace MobilyaOtomasyon
             }
             else
             {
-                using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Veritabani.mdf; Integrated Security = True"))
+                using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Database.mdf; Integrated Security = True"))
                 {
                     await con.OpenAsync();
 
@@ -194,7 +194,7 @@ namespace MobilyaOtomasyon
             }
             else
             {
-                using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Veritabani.mdf; Integrated Security = True"))
+                using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Database.mdf; Integrated Security = True"))
                 {
                     await con.OpenAsync();
                     using (SqlCommand cmd = new SqlCommand("INSERT INTO Urun (MusteriId, UrunAdi, Adres) VALUES (@mid, @urunisim, @adres); SELECT SCOPE_IDENTITY();", con))
@@ -234,7 +234,7 @@ namespace MobilyaOtomasyon
         // Ürünleri çağırır
         public static async Task<DataTable> UrunleriCagir()
         {
-            using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Veritabani.mdf; Integrated Security = True"))
+            using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Database.mdf; Integrated Security = True"))
             {
                 await con.OpenAsync();
                 using (SqlDataAdapter reader = new SqlDataAdapter("SELECT " +
@@ -266,7 +266,7 @@ namespace MobilyaOtomasyon
             }
             else
             {
-                using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Veritabani.mdf; Integrated Security = True"))
+                using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Database.mdf; Integrated Security = True"))
                 {
                     await con.OpenAsync();
 
