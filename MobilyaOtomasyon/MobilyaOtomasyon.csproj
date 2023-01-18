@@ -29,4 +29,10 @@
     <Compile Update="BosSayfa.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Database.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
