@@ -72,6 +72,7 @@ namespace MobilyaOtomasyon
             }
         }
 
+        // Müşteri bilgilerini düzenler
         public static async Task<bool> MusteriDuzenle(string? id, string? isim, string? soyisim, string? telno)
         {
             if (!StrKontrol(id, -1) || !StrKontrol(isim, 50) || !StrKontrol(soyisim, 50) || !StrKontrol(telno, 11))
@@ -97,12 +98,84 @@ namespace MobilyaOtomasyon
             }
         }
 
+        // Müşterileri çağırır
         public static async Task<DataTable> MusterileriCagir()
         {
             using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Veritabani.mdf; Integrated Security = True"))
             {
                 await con.OpenAsync();
-                using (SqlDataAdapter reader = new SqlDataAdapter("SELECT * FROM Musteri", con))
+                using (SqlDataAdapter reader = new SqlDataAdapter("SELECT MusteriID as ID, Ad, Soyad, TelefonNum as 'Telefon Numarası' FROM Musteri", con))
+                {
+                    var dt = new DataTable();
+                    reader.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+
+        // Ürün ve ebat bilgilerini ekler
+        public static async Task<bool> UrunEkle(string? MusteriID, string? Urunİsmi, string? Adres, List<EbatBilgi>? Ebatlar)
+        {
+            if (!StrKontrol(MusteriID, -1) || !StrKontrol(Urunİsmi, 50) || !StrKontrol(Adres, 100) || Ebatlar == null || Ebatlar.Count <= 0)
+            {
+                // Değerler uygunsuz.
+                return false;
+            }
+            else
+            {
+                using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Veritabani.mdf; Integrated Security = True"))
+                {
+                    await con.OpenAsync();
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO Urun (MusteriId, UrunAdi, Adres) VALUES (@mid, @urunisim, @adres); SELECT SCOPE_IDENTITY();", con))
+                    {
+                        cmd.Parameters.Add("@mid", SqlDbType.Int).Value = MusteriID;
+                        cmd.Parameters.Add("@urunisim", SqlDbType.NVarChar).Value = Urunİsmi;
+                        cmd.Parameters.Add("@adres", SqlDbType.NVarChar).Value = Adres;
+                        cmd.CommandType = CommandType.Text;
+                        decimal UrunID = -1;
+                        UrunID = (decimal)await cmd.ExecuteScalarAsync();
+
+                        if (UrunID == -1)
+                        {
+                            // Veri işlenemedi.
+                            return false;
+                        }
+
+                        foreach (var item in Ebatlar)
+                        {
+                            using (SqlCommand cmd1 = new SqlCommand("INSERT INTO Ebatlar (UrunID, EbatIsim, EbatDeger, EbatTur) VALUES (@uid, @ebatisim, @ebatdeger, @ebattur)", con))
+                            {
+                                cmd1.Parameters.Add("@uid", SqlDbType.Int).Value = UrunID;
+                                cmd1.Parameters.Add("@ebatisim", SqlDbType.NVarChar).Value = item.EbatIsmi;
+                                cmd1.Parameters.Add("@ebatdeger", SqlDbType.NVarChar).Value = item.EbatDegeri;
+                                cmd1.Parameters.Add("@ebattur", SqlDbType.Bit).Value = item.EbatTuruMetre;
+                                cmd1.CommandType = CommandType.Text;
+                                await cmd1.ExecuteNonQueryAsync();
+                            }
+                        }
+
+                        return true;
+                    }
+                }
+            }
+        }
+
+        // Ürünleri çağırır
+        public static async Task<DataTable> UrunleriCagir()
+        {
+            using (SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = D:\VisualStudioProjects\MobilyaOtomasyon\MobilyaOtomasyon\Veritabani.mdf; Integrated Security = True"))
+            {
+                await con.OpenAsync();
+                using (SqlDataAdapter reader = new SqlDataAdapter("SELECT " +
+                    "Urun.UrunAdi as 'Ürün Adı', " +
+                    "Urun.GirisTarihi as 'Giriş Tarihi', " +
+                    "Urun.TeslimTarihi as 'Teslim Tarihi', " +
+                    "Urun.TeslimEdildi as 'Teslim Edildi?', " +
+                    "Urun.Adres, " +
+                    "Musteri.Ad as 'Müşteri Adı', " +
+                    "Musteri.Soyad as 'Müşteri Soyadı', " +
+                    "Musteri.TelefonNum as 'Müşteri Telefon Numarası' " +
+                    "FROM Urun JOIN Musteri ON Musteri.MusteriId = Urun.MusteriId", con)) //"SELECT Urun.UrunAdi as 'Ürün Adı', Urun.TeslimEdildi as 'Teslim Edildi?', Urun.GirisTarihi as 'Giriş Tarihi', Urun.TeslimTarihi as 'Teslim Tarihi', Urun.Adres, Ebatlar.EbatId as 'Ebat Miktarı', Musteri.Ad as 'Müşteri Adı', Musteri.Soyad as 'Müşteri Soyadı' FROM Musteri JOIN Urun ON Musteri.MusteriId = Urun.MusteriId JOIN Ebatlar ON Urun.UrunId = Ebatlar.UrunId"
                 {
                     var dt = new DataTable();
                     reader.Fill(dt);

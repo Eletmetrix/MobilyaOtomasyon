@@ -13,6 +13,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Urunler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UrunEkleBilgi.cs" />
+    <Compile Update="UrunEkleMusteriSec.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Musteriler.cs" />
     <Compile Update="MusteriEkle.cs" />
     <Compile Update="BosSayfa.cs" />

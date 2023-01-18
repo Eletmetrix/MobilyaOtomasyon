@@ -74,13 +74,13 @@
             // 
             // SoyisimTxtBox
             // 
-            this.SoyisimTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.SoyisimTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SoyisimTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SoyisimTxtBox.Location = new System.Drawing.Point(150, 110);
             this.SoyisimTxtBox.Margin = new System.Windows.Forms.Padding(0);
             this.SoyisimTxtBox.MaxLength = 50;
             this.SoyisimTxtBox.Name = "SoyisimTxtBox";
-            this.SoyisimTxtBox.Size = new System.Drawing.Size(625, 20);
+            this.SoyisimTxtBox.Size = new System.Drawing.Size(625, 27);
             this.SoyisimTxtBox.TabIndex = 1;
             // 
             // label5
@@ -118,24 +118,24 @@
             // 
             // IsimTxtBox
             // 
-            this.IsimTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.IsimTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IsimTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.IsimTxtBox.Location = new System.Drawing.Point(150, 50);
             this.IsimTxtBox.Margin = new System.Windows.Forms.Padding(0);
             this.IsimTxtBox.MaxLength = 50;
             this.IsimTxtBox.Name = "IsimTxtBox";
-            this.IsimTxtBox.Size = new System.Drawing.Size(625, 20);
+            this.IsimTxtBox.Size = new System.Drawing.Size(625, 27);
             this.IsimTxtBox.TabIndex = 0;
             // 
             // TelNoTxtBox
             // 
-            this.TelNoTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TelNoTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TelNoTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TelNoTxtBox.Location = new System.Drawing.Point(150, 170);
             this.TelNoTxtBox.Margin = new System.Windows.Forms.Padding(0);
             this.TelNoTxtBox.Mask = "\\00000000000";
             this.TelNoTxtBox.Name = "TelNoTxtBox";
-            this.TelNoTxtBox.Size = new System.Drawing.Size(625, 20);
+            this.TelNoTxtBox.Size = new System.Drawing.Size(625, 27);
             this.TelNoTxtBox.TabIndex = 2;
             // 
             // panel1

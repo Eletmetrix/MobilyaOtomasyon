@@ -5,7 +5,6 @@ namespace MobilyaOtomasyon
     public partial class AnaForm : Form
     {
         public Dictionary<string, BosSayfa> FrmList { get; private set; } = new Dictionary<string, BosSayfa>();
-        public string SuAnkiForm { get; private set; } = "";
 
         public AnaForm()
         {
@@ -31,7 +30,10 @@ namespace MobilyaOtomasyon
             FrmList = new Dictionary<string, BosSayfa> {
                 { "Ana Sayfa", new AnaSayfa(this) },
                 { "Müþteri Ekle", new MusteriEkle(this) },
-                { "Müþteri Bilgisi", new Musteriler(this) }
+                { "Müþteri Bilgisi", new Musteriler(this) },
+                { "Ürün Ekle", new UrunEkleMusteriSec(this) },
+                { "Ürün Ekle (Aþama 2)", new UrunEkleBilgi(this) },
+                { "Ürün Bilgisi", new Urunler(this) }
             };
 
 
@@ -48,7 +50,7 @@ namespace MobilyaOtomasyon
             SimulateButtonClick(0);
         }
 
-        // BURADA DRAG&DROP ÝÞLEMLERÝNE BAÞLIYORUZ
+        #region DRAG & DROP ÝÞLEMLERÝ
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
@@ -68,14 +70,22 @@ namespace MobilyaOtomasyon
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
-
-        // BURADA DRAG&DROP ÝÞLEMLERÝ BÝTÝYOR
+        #endregion
 
         // Tüm paneldeki butonlar bu fonksiyondan geçiyor
         private void PanelButtonsClick(object sender, EventArgs e)
         {
             Button? btn = sender as Button;
-            if (btn != null && FrmList.ContainsKey(btn.Text))
+            if (btn != null)
+            {
+                ShowFormInPanel(btn.Text);
+            }
+        }
+
+        // Eðer verilen key deðerine uygun form mevcut ise onu gösterir
+        public void ShowFormInPanel(string key)
+        {
+            if (FrmList.ContainsKey(key))
             {
                 foreach (var item in FormPanel.Controls)
                 {
@@ -87,11 +97,11 @@ namespace MobilyaOtomasyon
                     }
                 }
 
-                BosSayfa form = FrmList[btn.Text];
+                BosSayfa form = FrmList[key];
                 form.Show();
                 form.SayfaAcildi();
 
-                AnaLabel.Text = btn.Text;
+                AnaLabel.Text = key;
             }
         }
 

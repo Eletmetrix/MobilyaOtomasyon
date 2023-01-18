@@ -36,7 +36,6 @@ namespace MobilyaOtomasyon
         private async void EkleBtn_Click(object sender, EventArgs e)
         {
             bool basarili = false;
-            bool duzenleme = false;
 
             if (TutulanID == "-1")
             {
@@ -45,7 +44,6 @@ namespace MobilyaOtomasyon
             else
             {
                 basarili = await GlobalDatabaseActions.MusteriDuzenle(TutulanID, IsimTxtBox.Text, SoyisimTxtBox.Text, TelNoTxtBox.Text);
-                duzenleme = true;
             }
 
             string icerik = basarili ? "Müşteri bilgisi kaydedildi!" : "İşlem başarısız oldu. Lütfen bilgileri kontrol ediniz";
