@@ -36,7 +36,6 @@
             this.IsimTxtBox = new System.Windows.Forms.TextBox();
             this.TelNoTxtBox = new System.Windows.Forms.MaskedTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.IptalBtn = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.EkleBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
@@ -140,7 +139,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.IptalBtn);
             this.panel1.Controls.Add(this.splitter1);
             this.panel1.Controls.Add(this.EkleBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -148,24 +146,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(619, 44);
             this.panel1.TabIndex = 5;
-            // 
-            // IptalBtn
-            // 
-            this.IptalBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.IptalBtn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.IptalBtn.Enabled = false;
-            this.IptalBtn.FlatAppearance.BorderSize = 0;
-            this.IptalBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IptalBtn.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.IptalBtn.ForeColor = System.Drawing.SystemColors.Control;
-            this.IptalBtn.Location = new System.Drawing.Point(209, 0);
-            this.IptalBtn.Name = "IptalBtn";
-            this.IptalBtn.Size = new System.Drawing.Size(200, 44);
-            this.IptalBtn.TabIndex = 6;
-            this.IptalBtn.Text = "İptal";
-            this.IptalBtn.UseVisualStyleBackColor = false;
-            this.IptalBtn.Visible = false;
-            this.IptalBtn.Click += new System.EventHandler(this.IptalBtn_Click);
             // 
             // splitter1
             // 
@@ -218,7 +198,6 @@
         private MaskedTextBox TelNoTxtBox;
         private Panel panel1;
         private Button EkleBtn;
-        private Button IptalBtn;
         private Splitter splitter1;
     }
 }

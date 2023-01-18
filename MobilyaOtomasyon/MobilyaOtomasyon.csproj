@@ -13,6 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="MusteriDuzenle.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Urunler.cs">
       <SubType>Form</SubType>
     </Compile>

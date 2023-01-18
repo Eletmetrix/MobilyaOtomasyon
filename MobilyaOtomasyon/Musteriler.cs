@@ -24,14 +24,14 @@ namespace MobilyaOtomasyon
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (UstForm != null && UstForm.FrmList.ContainsKey("Müşteri Ekle") && UstForm.FrmList["Müşteri Ekle"] != null && UstForm.FrmList["Müşteri Ekle"] is MusteriEkle)
+            if (UstForm != null && UstForm.FrmList.ContainsKey("Müşteri Düzenle") && UstForm.FrmList["Müşteri Düzenle"] != null && UstForm.FrmList["Müşteri Düzenle"] is MusteriDuzenle)
             {
                 string? id = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
                 string? ad = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
                 string? soyad = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
                 string? telno = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
                 
-                ((MusteriEkle)UstForm.FrmList["Müşteri Ekle"]).MusteriDuzenle(id, ad, soyad, telno);
+                ((MusteriDuzenle)UstForm.FrmList["Müşteri Düzenle"]).Duzenle(id, ad, soyad, telno);
             }
         }
     }

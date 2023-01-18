@@ -31,7 +31,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.KapatBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
             this.UrunBilgisiBtn = new System.Windows.Forms.Button();
             this.MusteriBilgisiBtn = new System.Windows.Forms.Button();
             this.UrunEkleBtn = new System.Windows.Forms.Button();
@@ -75,7 +74,6 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel2.Controls.Add(this.button6);
             this.panel2.Controls.Add(this.UrunBilgisiBtn);
             this.panel2.Controls.Add(this.MusteriBilgisiBtn);
             this.panel2.Controls.Add(this.UrunEkleBtn);
@@ -87,22 +85,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(200, 629);
             this.panel2.TabIndex = 1;
-            // 
-            // button6
-            // 
-            this.button6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button6.ForeColor = System.Drawing.SystemColors.Control;
-            this.button6.Location = new System.Drawing.Point(0, 425);
-            this.button6.Name = "button6";
-            this.button6.Padding = new System.Windows.Forms.Padding(10);
-            this.button6.Size = new System.Drawing.Size(200, 65);
-            this.button6.TabIndex = 7;
-            this.button6.Text = "Ana Sayfa";
-            this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.UseVisualStyleBackColor = true;
             // 
             // UrunBilgisiBtn
             // 
@@ -268,7 +250,6 @@
 
         private Panel panel1;
         private Panel panel2;
-        private Button button6;
         private Button UrunBilgisiBtn;
         private Button MusteriBilgisiBtn;
         private Button UrunEkleBtn;
