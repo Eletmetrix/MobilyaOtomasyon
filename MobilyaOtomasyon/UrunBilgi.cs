@@ -21,6 +21,7 @@ namespace MobilyaOtomasyon
             InitializeComponent();
         }
 
+        // Sayfa açıldığında verileri gerekli alanlara işler
         public override async void SayfaAcildi()
         {
             if (UrunID != null && UrunID != "-1")

@@ -22,11 +22,6 @@ namespace MobilyaOtomasyon
             dataGridView1.DataSource = await GlobalDatabaseActions.MusterileriCagir();
         }
 
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-
         private void DuzenleBtn_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0 && UstForm != null && UstForm.FrmList.ContainsKey("Müşteri Düzenle") && UstForm.FrmList["Müşteri Düzenle"] != null && UstForm.FrmList["Müşteri Düzenle"] is MusteriDuzenle)
